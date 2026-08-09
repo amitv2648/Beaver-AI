@@ -4,7 +4,7 @@
 
 ## Current Phase
 
-Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2A — Application Shell** is complete.
+Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2B — Routing Foundation** is complete.
 
 ## What Exists
 
@@ -17,11 +17,14 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2A —
 - Tailwind CSS integration and basic global styling
 - A basic `src/` structure with an application entry point and root component
 - A reusable, responsive application shell with header, main content, and footer areas
+- A modular React Router configuration with public-route layout support
+- A home page route and fallback page for unmatched URLs
 - Development, production build, and local preview scripts
 
 ## What Is Incomplete
 
 - No product functionality has been implemented.
+- Authentication and protected routes have not been implemented.
 - Firebase has not been integrated.
 - Automated tests and deployment configuration do not exist.
 - Detailed application architecture and service designs remain undefined.
@@ -29,4 +32,4 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2A —
 
 ## Next Recommended Task
 
-Define Phase 1.2B before beginning further implementation.
+Define Phase 1.2C before beginning further implementation.

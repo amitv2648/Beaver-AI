@@ -6,6 +6,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Added
 
+- Completed Phase 1.2B with a modular React Router foundation.
+- Added a public route layout, home route, and fallback page for unmatched URLs.
 - Completed Phase 1.2A with a reusable application shell.
 - Added responsive header, main content, and footer areas for desktop and mobile layouts.
 - Completed Phase 1.1 project initialization with Vite, React, and TypeScript.
@@ -16,6 +18,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Verified
 
+- Confirmed that the home and fallback URLs load through the production application.
+- Confirmed that the routing-enabled production build completes successfully.
 - Confirmed that the application shell production build completes successfully.
 - Confirmed that the production application build completes successfully.
 

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 type AppShellProps = {
   children: ReactNode
@@ -9,7 +10,12 @@ export function AppShell({ children }: AppShellProps) {
     <div className="flex min-h-screen flex-col bg-slate-50 text-slate-950">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-          <span className="text-lg font-semibold tracking-tight">Beaver AI</span>
+          <Link
+            to="/"
+            className="rounded-sm text-lg font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-950"
+          >
+            Beaver AI
+          </Link>
         </div>
       </header>
 

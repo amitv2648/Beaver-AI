@@ -7,6 +7,7 @@
 - **TypeScript:** Statically typed application code for safer change and clearer contracts.
 - **Tailwind CSS:** Utility-based styling for consistent, maintainable interface development.
 - **Firebase:** Initial authentication and backend infrastructure.
+- **React Router:** Client-side route configuration and navigation.
 
 ## Architecture Direction
 
@@ -18,8 +19,10 @@ Application code will depend on explicit service boundaries rather than direct F
 - React and TypeScript provide the application entry point and root component.
 - Tailwind CSS is integrated through its Vite plugin and global stylesheet.
 - Application source currently lives in `src/`.
+- Route configuration lives in `src/routes/`, route-level pages live in `src/pages/`, and reusable layout components live in `src/components/layout/`.
+- Public routes use a shared route layout. This structure allows future authenticated routes to be added separately without changing the public route foundation.
 
-Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
+The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
 
 ## Still Undecided
 
