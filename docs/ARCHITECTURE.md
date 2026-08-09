@@ -1,0 +1,31 @@
+# Beaver AI Architecture
+
+## Initial Technology Stack
+
+- **React:** Component-based user interface layer for Beaver AI's web application.
+- **Vite:** Local development and production build tooling.
+- **TypeScript:** Statically typed application code for safer change and clearer contracts.
+- **Tailwind CSS:** Utility-based styling for consistent, maintainable interface development.
+- **Firebase:** Initial authentication and backend infrastructure.
+
+## Architecture Direction
+
+Application code will depend on explicit service boundaries rather than direct Firebase coupling throughout the product. Firebase-specific integration will be isolated so individual backend services can be replaced later without redesigning unrelated application layers.
+
+## Current Application Foundation
+
+- Vite provides the development and production build pipeline.
+- React and TypeScript provide the application entry point and root component.
+- Tailwind CSS is integrated through its Vite plugin and global stylesheet.
+- Application source currently lives in `src/`.
+
+Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
+
+## Still Undecided
+
+- AI model providers, orchestration, memory, and evaluation approach
+- Voice capture, transcription, synthesis, and real-time transport
+- Curriculum and mastery representation
+- Hosting, observability, CI/CD, and environment strategy
+- Testing, security, privacy, and accessibility implementation
+- Firebase service selection beyond its initial authentication and backend responsibility
