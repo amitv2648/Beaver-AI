@@ -6,6 +6,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Added
 
+- Completed Phase 1.2C with an initial shared UI component foundation.
+- Added reusable Button, Input, Card, Container, typography, and loading-state components without external UI dependencies.
 - Completed Phase 1.2B with a modular React Router foundation.
 - Added a public route layout, home route, and fallback page for unmatched URLs.
 - Completed Phase 1.2A with a reusable application shell.
@@ -18,6 +20,7 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Verified
 
+- Confirmed that the shared-component production build completes successfully.
 - Confirmed that the home and fallback URLs load through the production application.
 - Confirmed that the routing-enabled production build completes successfully.
 - Confirmed that the application shell production build completes successfully.

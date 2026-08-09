@@ -21,6 +21,8 @@ Application code will depend on explicit service boundaries rather than direct F
 - Application source currently lives in `src/`.
 - Route configuration lives in `src/routes/`, route-level pages live in `src/pages/`, and reusable layout components live in `src/components/layout/`.
 - Public routes use a shared route layout. This structure allows future authenticated routes to be added separately without changing the public route foundation.
+- Generic UI primitives live in `src/components/ui/` and are exported through a shared module entry point.
+- Shared components accept native element props where appropriate and provide reusable accessibility, responsive layout, and styling behavior.
 
 The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
 
