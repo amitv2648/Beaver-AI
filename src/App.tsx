@@ -1,14 +1,19 @@
+import { AppShell } from './components/layout/AppShell'
+
 export function App() {
   return (
-    <main className="grid min-h-screen place-items-center px-6">
-      <div className="text-center">
+    <AppShell>
+      <section className="my-auto w-full py-12 text-center">
         <p className="text-sm font-semibold tracking-widest text-emerald-700 uppercase">
           Beaver AI
         </p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
           Learning, personalized.
         </h1>
-      </div>
-    </main>
+        <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-600">
+          The application foundation is ready for the learning experiences ahead.
+        </p>
+      </section>
+    </AppShell>
   )
 }

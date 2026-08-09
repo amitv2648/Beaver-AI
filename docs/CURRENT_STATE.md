@@ -4,7 +4,7 @@
 
 ## Current Phase
 
-Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.1 — Project Initialization** is complete.
+Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2A — Application Shell** is complete.
 
 ## What Exists
 
@@ -16,6 +16,7 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.1 — 
 - A minimal Vite, React, and TypeScript application foundation
 - Tailwind CSS integration and basic global styling
 - A basic `src/` structure with an application entry point and root component
+- A reusable, responsive application shell with header, main content, and footer areas
 - Development, production build, and local preview scripts
 
 ## What Is Incomplete
@@ -28,4 +29,4 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.1 — 
 
 ## Next Recommended Task
 
-Define Phase 1.2 before beginning further implementation.
+Define Phase 1.2B before beginning further implementation.
