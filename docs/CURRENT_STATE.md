@@ -4,7 +4,7 @@
 
 ## Current Phase
 
-Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2D — Design Foundation** is complete.
+Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2E — Error Handling Foundation** is complete.
 
 ## What Exists
 
@@ -23,6 +23,9 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2D —
 - Shared responsive, accessibility, and styling behavior for generic UI primitives
 - Tailwind-integrated color, typography, spacing, radius, shadow, and breakpoint tokens
 - Semantic light and dark theme foundations used by the application shell and shared components
+- An application-level error boundary with a user-safe fallback
+- A reusable error-state pattern used by the not-found page
+- Development-only unexpected-error logging and a safe fallback simulation trigger
 - Development, production build, and local preview scripts
 
 ## What Is Incomplete
@@ -36,4 +39,4 @@ Beaver AI is in **Phase 1 — Product & Technical Foundation**. **Phase 1.2D —
 
 ## Next Recommended Task
 
-Define Phase 1.2E before beginning further implementation.
+Define Phase 1.2F before beginning further implementation.

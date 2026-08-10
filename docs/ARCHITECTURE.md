@@ -33,6 +33,14 @@ Application code will depend on explicit service boundaries rather than direct F
 - Spacing follows a 4-pixel base scale with a small set of border radii, soft shadows, and mobile-first breakpoints.
 - Shared UI components consume semantic tokens so themes can evolve without rewriting component styles.
 
+## Error Handling
+
+- A React application-level error boundary prevents unexpected render failures from leaving a blank interface.
+- Unexpected failures display a generic, accessible fallback without exposing technical details.
+- The shared `ErrorState` component provides a consistent pattern for not-found and future feature-level error states.
+- Unexpected error details are logged to the developer console only in development.
+- The boundary can be tested safely on the development server with `?simulateAppError=true`; this trigger is inactive in production builds.
+
 The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
 
 ## Still Undecided

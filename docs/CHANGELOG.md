@@ -6,6 +6,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Added
 
+- Completed Phase 1.2E with an application-level error boundary and user-safe fallback.
+- Added a reusable error-state pattern, development-only error logging, and a safe development fallback trigger.
 - Completed Phase 1.2D with an initial visual design foundation.
 - Added Tailwind-integrated color, typography, spacing, radius, shadow, and responsive breakpoint tokens.
 - Added semantic light and dark theme foundations and applied them to the application shell and shared components.
@@ -23,6 +25,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Verified
 
+- Confirmed that the production build succeeds and the error fallback renders through the development-only trigger.
+- Confirmed that technical error details are not rendered in the user-facing fallback.
 - Confirmed that the token-based design foundation builds successfully.
 - Confirmed that the shared-component production build completes successfully.
 - Confirmed that the home and fallback URLs load through the production application.
