@@ -6,6 +6,9 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Added
 
+- Completed Phase 1.2D with an initial visual design foundation.
+- Added Tailwind-integrated color, typography, spacing, radius, shadow, and responsive breakpoint tokens.
+- Added semantic light and dark theme foundations and applied them to the application shell and shared components.
 - Completed Phase 1.2C with an initial shared UI component foundation.
 - Added reusable Button, Input, Card, Container, typography, and loading-state components without external UI dependencies.
 - Completed Phase 1.2B with a modular React Router foundation.
@@ -20,6 +23,7 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Verified
 
+- Confirmed that the token-based design foundation builds successfully.
 - Confirmed that the shared-component production build completes successfully.
 - Confirmed that the home and fallback URLs load through the production application.
 - Confirmed that the routing-enabled production build completes successfully.

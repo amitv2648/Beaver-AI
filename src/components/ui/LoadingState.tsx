@@ -16,14 +16,14 @@ export function LoadingState({
       role="status"
       aria-live="polite"
       className={classNames(
-        'flex items-center justify-center gap-3 py-8 text-sm text-slate-600',
+        'flex items-center justify-center gap-3 py-8 text-sm text-muted',
         className,
       )}
       {...props}
     >
       <span
         aria-hidden="true"
-        className="size-5 animate-spin rounded-full border-2 border-slate-300 border-t-slate-800 motion-reduce:animate-none"
+        className="size-5 animate-spin rounded-full border-2 border-border border-t-primary motion-reduce:animate-none"
       />
       <span>{label}</span>
     </div>

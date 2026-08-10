@@ -11,10 +11,10 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-slate-950 text-white hover:bg-slate-800',
+  primary: 'bg-primary text-on-primary hover:bg-primary-hover',
   secondary:
-    'border border-slate-300 bg-white text-slate-900 hover:bg-slate-50',
-  ghost: 'bg-transparent text-slate-700 hover:bg-slate-100',
+    'border border-border bg-surface text-foreground hover:bg-surface-muted',
+  ghost: 'bg-transparent text-muted hover:bg-surface-muted hover:text-foreground',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -40,7 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       disabled={disabled}
       className={classNames(
-        'inline-flex items-center justify-center rounded-md font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950 disabled:cursor-not-allowed disabled:opacity-50',
+        'inline-flex items-center justify-center rounded-md font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50',
         variantClasses[variant],
         sizeClasses[size],
         className,

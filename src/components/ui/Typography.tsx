@@ -11,10 +11,10 @@ export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 }
 
 const headingSizeClasses: Record<HeadingSize, string> = {
-  sm: 'text-xl sm:text-2xl',
-  md: 'text-2xl sm:text-3xl',
-  lg: 'text-3xl sm:text-4xl',
-  xl: 'text-4xl sm:text-5xl',
+  sm: 'text-heading-sm',
+  md: 'text-heading-md',
+  lg: 'text-heading-lg',
+  xl: 'text-heading-xl',
 }
 
 export function Heading({
@@ -28,7 +28,7 @@ export function Heading({
   return (
     <Component
       className={classNames(
-        'font-bold tracking-tight text-slate-950',
+        'font-bold tracking-tight text-foreground',
         headingSizeClasses[size],
         className,
       )}
@@ -54,8 +54,8 @@ const textSizeClasses: Record<TextSize, string> = {
 }
 
 const textToneClasses: Record<TextTone, string> = {
-  default: 'text-slate-950',
-  muted: 'text-slate-600',
+  default: 'text-foreground',
+  muted: 'text-muted',
 }
 
 export function Text({

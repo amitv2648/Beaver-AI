@@ -12,7 +12,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     <div
       ref={ref}
       className={classNames(
-        'rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6',
+        'rounded-lg border border-border bg-surface p-5 shadow-sm sm:p-6',
         className,
       )}
       {...props}

@@ -9,12 +9,12 @@ type AppShellProps = {
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-950">
-      <header className="border-b border-slate-200 bg-white">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <header className="border-b border-border bg-surface">
         <Container className="flex h-16 items-center">
           <Link
             to="/"
-            className="rounded-sm text-lg font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-950"
+            className="rounded-sm text-lg font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
             Beaver AI
           </Link>
@@ -28,8 +28,8 @@ export function AppShell({ children }: AppShellProps) {
         <Container className="flex">{children}</Container>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
-        <Container className="flex items-center py-5 text-sm text-slate-600">
+      <footer className="border-t border-border bg-surface">
+        <Container className="flex items-center py-5 text-sm text-muted">
           <p>© {new Date().getFullYear()} Beaver AI</p>
         </Container>
       </footer>

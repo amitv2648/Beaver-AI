@@ -24,6 +24,15 @@ Application code will depend on explicit service boundaries rather than direct F
 - Generic UI primitives live in `src/components/ui/` and are exported through a shared module entry point.
 - Shared components accept native element props where appropriate and provide reusable accessibility, responsive layout, and styling behavior.
 
+## Design Foundation
+
+- Tailwind theme tokens and semantic application colors are defined in `src/styles.css`.
+- The design system uses a green-teal primary palette, neutral surfaces, and high-contrast text to support a friendly, trustworthy educational product.
+- Semantic color tokens provide light defaults and class-based dark-theme values without coupling components to raw palette colors.
+- Typography uses a system font stack and a responsive heading scale.
+- Spacing follows a 4-pixel base scale with a small set of border radii, soft shadows, and mobile-first breakpoints.
+- Shared UI components consume semantic tokens so themes can evolve without rewriting component styles.
+
 The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
 
 ## Still Undecided
