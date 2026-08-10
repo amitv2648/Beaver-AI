@@ -6,6 +6,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Added
 
+- Completed Phase 1.2F with a Vitest and React Testing Library foundation.
+- Added isolated test configuration, jsdom setup, an `npm test` script, and an initial shared Button component test.
 - Completed Phase 1.2E with an application-level error boundary and user-safe fallback.
 - Added a reusable error-state pattern, development-only error logging, and a safe development fallback trigger.
 - Completed Phase 1.2D with an initial visual design foundation.
@@ -25,6 +27,8 @@ This file records meaningful product, architecture, and repository changes in re
 
 ### Verified
 
+- Confirmed that the test suite runs successfully and the initial component test passes.
+- Confirmed that the application builds successfully with the testing configuration.
 - Confirmed that the production build succeeds and the error fallback renders through the development-only trigger.
 - Confirmed that technical error details are not rendered in the user-facing fallback.
 - Confirmed that the token-based design foundation builds successfully.

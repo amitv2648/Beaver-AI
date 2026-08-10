@@ -41,7 +41,14 @@ Application code will depend on explicit service boundaries rather than direct F
 - Unexpected error details are logged to the developer console only in development.
 - The boundary can be tested safely on the development server with `?simulateAppError=true`; this trigger is inactive in production builds.
 
-The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, automated tests, and deployment configuration have not been implemented.
+## Testing Foundation
+
+- Vitest provides the test runner and integrates with the Vite and TypeScript toolchain.
+- React Testing Library provides component rendering and user-facing queries in a jsdom environment.
+- Test configuration lives in `vitest.config.ts`; setup and test files are isolated under `src/test/`.
+- `npm test` runs the test suite once for local and future automated use.
+
+The current router provides the home route and a fallback route. Authentication, protected routes, Firebase, data models, APIs, and deployment configuration have not been implemented.
 
 ## Still Undecided
 
@@ -49,5 +56,5 @@ The current router provides the home route and a fallback route. Authentication,
 - Voice capture, transcription, synthesis, and real-time transport
 - Curriculum and mastery representation
 - Hosting, observability, CI/CD, and environment strategy
-- Testing, security, privacy, and accessibility implementation
+- Security, privacy, and accessibility implementation
 - Firebase service selection beyond its initial authentication and backend responsibility
