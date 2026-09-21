@@ -3,7 +3,8 @@
 ## Roadmap rules
 
 - Phases describe dependency order and product maturity, not fixed dates.
-- Only Phase 0 is currently in scope.
+- Phases 0 and 1 are complete in the repository. Phase 2 is the next planned
+  product phase; Phase 2+ implementation remains out of current scope.
 - A later phase begins only when its prerequisites and entry decisions are
   sufficiently stable; discovery may occur earlier, implementation may not.
 - Security, safety, privacy, accessibility, observability, documentation, and
@@ -76,6 +77,9 @@ complete and no Phase 1+ functionality has been implemented.
 
 ## Phase 1 — Authentication, Accounts & Permissions
 
+**Status:** implemented; environment-specific Firebase/PostgreSQL smoke
+validation is required before deployment.
+
 **Purpose:** establish secure identity and access foundations.
 
 **Major outcomes:** selected application stack; account lifecycle; secure
@@ -86,7 +90,11 @@ threat model and privacy-aware audit trail.
 **Dependencies:** Phase 0. Before production use, select initial age band,
 jurisdiction, account types, guardian/consent needs, and accessibility target.
 
-**Boundary:** no rich learner profile, courses, or learning dashboard.
+**Delivered boundary:** Firebase email/password and Google authentication;
+Beaver-owned accounts; protected account settings and deletion; student-owned,
+scoped parent/educator invitations and connections; server authorization and
+audit foundations. No rich learner profile, courses, learning data, or
+relationship dashboard was introduced.
 
 ## Phase 2 — Student Onboarding & Long-Term Profiles
 

@@ -8,13 +8,13 @@ before it is needed.
 
 ## Data categories
 
-| Category | Examples | Treatment |
-| --- | --- | --- |
-| Public/reference | Published public curriculum metadata | Integrity and versioning |
-| Internal | Content drafts, configuration, aggregate operations metrics | Authorized access |
-| Personal | Name, account contact, goals, learning history | Purpose limitation and least privilege |
+| Category          | Examples                                                                                             | Treatment                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Public/reference  | Published public curriculum metadata                                                                 | Integrity and versioning                                   |
+| Internal          | Content drafts, configuration, aggregate operations metrics                                          | Authorized access                                          |
+| Personal          | Name, account contact, goals, learning history                                                       | Purpose limitation and least privilege                     |
 | Sensitive student | Age/birth context, accommodations, minor/guardian relationships, tutor transcripts, work submissions | Strong minimization, restricted access, explicit retention |
-| Security secrets | Password verifiers, session tokens, keys | Never logged; dedicated secret/credential handling |
+| Security secrets  | Password verifiers, session tokens, keys                                                             | Never logged; dedicated secret/credential handling         |
 
 Legal classifications vary by jurisdiction. Before collecting a field, record
 its purpose, owner, sensitivity, retention, processors, and deletion behavior.
@@ -51,16 +51,21 @@ promotes a permitted result.
   for defined use cases. Each remains a projection or index, not an accidental
   source of truth.
 
-No physical schema or product has been selected in Phase 0.
+PostgreSQL is now selected as the system of record and Drizzle owns versioned
+SQL migrations (ADR-0005). Phase 1 creates only `accounts`,
+`auth_identities`, `sharing_invitations`, `sharing_connections`, and
+`account_audit_events`; future educational schemas remain unimplemented.
 
 ## Identity and isolation
 
 - Use opaque, non-semantic identifiers; do not encode names, ages, or roles.
 - Separate authentication credentials from learner-domain records.
-- Model guardian, educator, organization, and learner relationships explicitly;
-  never infer authority from shared contact information.
-- Every learner-scoped query and mutation requires server-side authorization
-  and an explicit scope.
+- Parent and educator relationships are explicit, student-owned sharing
+  connections. Authority is never inferred from shared contact information or
+  a global role.
+- Every student-scoped query and mutation requires server-side authorization
+  and an explicit scope. The current authorization service checks owner,
+  recipient, active connection state, and required permission.
 - If organizations are introduced, tenant isolation must be designed and tested
   rather than assumed from an organization ID column.
 - Use anonymized or generated fixtures outside production. Production student

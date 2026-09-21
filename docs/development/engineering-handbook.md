@@ -2,13 +2,35 @@
 
 ## Current repository state
 
-The repository is intentionally documentation-only in Phase 0. There is no
-application runtime, package manager, database, environment file, build, lint,
-or test command yet. Do not invent setup commands that cannot run.
+Phase 1 implements a strict TypeScript Next.js modular monolith. Firebase
+Authentication proves identity; PostgreSQL stores Beaver AI accounts, identity
+links, sharing relationships, and audit events. Drizzle manages migrations,
+Zod validates API input, and Vitest, ESLint, Prettier, and TypeScript provide
+quality gates.
 
-When Phase 1 selects the initial stack, update this document and the root README
-with exact prerequisites, supported versions, installation, configuration,
-database, development, test, build, and troubleshooting commands.
+## Development setup
+
+Use Node.js 22 or newer and npm.
+
+```powershell
+npm install
+Copy-Item .env.example .env.local
+npm run db:migrate
+npm run dev
+```
+
+Fill `.env.local` with PostgreSQL, Firebase Web App, and Firebase Admin
+configuration before migration/runtime use. Use Application Default Credentials
+or the Firebase Auth emulator; never place a service-account JSON file in this
+repository.
+
+Available commands:
+
+- `npm run dev`, `build`, and `start` operate the Next.js application.
+- `npm run db:generate`, `db:migrate`, and `db:studio` manage PostgreSQL.
+- `npm run format:check`, `lint`, `typecheck`, `test`, and `test:coverage`
+  provide focused checks.
+- `npm run check` runs the complete local quality gate.
 
 ## Engineering values
 
@@ -21,21 +43,24 @@ database, development, test, build, and troubleshooting commands.
 
 ## Intended project organization
 
-Use a single repository while the product and team are developing shared
-foundations. Once application code exists, organize by independently meaningful
-applications and reusable packages only where reuse is real. Within the server,
-prefer business-capability modules described in the
-[system architecture](../architecture/system-architecture.md).
+The single application is organized as:
 
-Illustrative names such as `apps/`, `packages/`, or `modules/` are not created
-in Phase 0 because no stack has established their need. Avoid a global
-`utils` dumping ground, cross-module database access, and packages that only
-re-export unrelated code.
+- `src/app`: Next.js pages and protected API interfaces;
+- `src/components`: client presentation and interaction;
+- `src/modules`: framework-independent business models, ports, and services;
+- `src/infrastructure`: PostgreSQL and Firebase adapters;
+- `src/server`: request authentication and HTTP mapping;
+- `drizzle`: reviewed SQL migration history; and
+- `docs`: maintained product and architecture source of truth.
+
+Identity and Access is the first business-capability module. Future modules use
+its public authorization service rather than its tables. Avoid a global `utils`
+dumping ground, cross-module database access, and packages that only re-export
+unrelated code.
 
 ## Coding conventions
 
-Stack-specific formatting and lint rules will be automated after stack
-selection. The following conventions already apply:
+Formatting and lint rules are automated. The following conventions apply:
 
 - Use domain language defined in the
   [domain model](../architecture/domain-model.md).
@@ -55,9 +80,9 @@ selection. The following conventions already apply:
 - Comment why a non-obvious decision exists, not what clear code already says.
 - Remove dead code rather than leaving commented-out implementation.
 
-If TypeScript is accepted, enable strict type checking, avoid unbounded `any`,
-use schema validation at runtime boundaries, and separate wire contracts from
-internal domain types when their evolution differs.
+TypeScript strict checking is enabled. Avoid unbounded `any`, use schema
+validation at runtime boundaries, and separate wire contracts from internal
+domain types when their evolution differs.
 
 ## API and contract conventions
 

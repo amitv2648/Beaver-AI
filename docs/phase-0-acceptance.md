@@ -14,39 +14,39 @@ architecture was reused or assumed.
 
 - [x] Product vision and defining promise are documented.
 - [x] Product principles, target users, outcomes, and core experience are
-  documented.
+      documented.
 - [x] Long-term capabilities, boundaries, and explicit Phase 0 non-goals are
-  documented.
+      documented.
 - [x] The Phase 0–15 roadmap states the purpose, outcomes, dependencies, and
-  boundaries of every phase.
+      boundaries of every phase.
 - [x] Current documentation scope and future implementation scope are
-  unambiguous.
+      unambiguous.
 - [x] System context, major functional modules, integration boundaries, and
-  technical architecture direction are documented.
+      technical architecture direction are documented.
 - [x] The conceptual domain model distinguishes curriculum, content, evidence,
-  mastery, recommendations, tutoring, and rewards.
+      mastery, recommendations, tutoring, and rewards.
 - [x] Data ownership, classification, provenance, lifecycle, storage direction,
-  and deletion expectations are documented.
+      and deletion expectations are documented.
 - [x] AI orchestration, authority, context, safety, tool, evaluation, and
-  failure principles are documented.
+      failure principles are documented.
 - [x] Experience, visual identity, responsive, accessibility, and future design
-  system direction are documented.
+      system direction are documented.
 - [x] Security, privacy, student safety, authentication/authorization, threat,
-  incident, and future compliance principles are documented.
+      incident, and future compliance principles are documented.
 - [x] Development setup expectations, organization, coding conventions,
-  dependency/configuration practices, workflow, and definition of done are
-  documented.
+      dependency/configuration practices, workflow, and definition of done are
+      documented.
 - [x] A risk-based testing strategy covers static, unit, integration,
-  end-to-end, specialist, accessibility, AI, security, resilience, and release
-  evidence.
+      end-to-end, specialist, accessibility, AI, security, resilience, and release
+      evidence.
 - [x] Documentation locations, status language, update triggers, review, and
-  ownership conventions are established.
+      ownership conventions are established.
 - [x] The ADR process is established and foundational architectural decisions
-  are recorded.
+      are recorded.
 - [x] The repository is organized around canonical documentation areas with a
-  root entry point and contribution guide.
+      root entry point and contribution guide.
 - [x] No Phase 1+ user-facing functionality, runtime scaffold, dependency, or
-  placeholder implementation was created.
+      placeholder implementation was created.
 
 ## Foundational decisions
 

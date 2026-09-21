@@ -23,6 +23,8 @@ development documents describe accepted direction and current reality.
   orchestration, evaluation, and safety.
 - [Design direction](architecture/design-direction.md) — experience and visual
   system foundations.
+- [Identity and access](architecture/identity-and-access.md) — implemented
+  authentication, account, sharing, and authorization boundaries.
 
 ## Delivery and development
 
@@ -38,15 +40,17 @@ development documents describe accepted direction and current reality.
 ## Safety and decisions
 
 - [Security, privacy, and student safety](safety/security-privacy-and-safety.md)
+- [Phase 1 threat model](safety/phase-1-threat-model.md)
 - [Architecture decision records](decisions/README.md)
 - [Phase 0 acceptance review](phase-0-acceptance.md)
+- [Phase 1 acceptance review](phase-1-acceptance.md)
 
 ## Reading order for a new contributor
 
 1. Product definition
 2. Feature scope
 3. Roadmap
-4. System architecture
+4. System and identity/access architecture
 5. Domain model and data architecture
 6. AI architecture and safety
 7. Engineering and testing practices

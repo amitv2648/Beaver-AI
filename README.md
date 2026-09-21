@@ -1,37 +1,76 @@
 # Beaver AI
 
-Beaver AI is a planned AI-powered personalized learning platform. It will help
-students understand what they know, identify gaps, follow an adaptive learning
-path, practice effectively, and receive context-aware tutoring.
+Beaver AI is an AI-powered personalized learning platform being built around
+each student's knowledge, goals, progress, and needs.
 
-The project is currently in **Phase 0: Documentation, Product Definition &
-Architecture**. This repository intentionally contains no application
-implementation yet.
+**Phase 1: Authentication, Accounts & Permissions** is implemented. The current
+application provides Firebase email/password and Google authentication, a
+Beaver-owned account, private protected account settings, account deletion, and
+student-controlled parent/educator sharing foundations. Phase 2 onboarding and
+all learning features remain out of scope.
 
 ## Product promise
 
 Beaver AI personalizes learning around each student's knowledge, goals,
 progress, and needs instead of placing every student on the same path.
 
-## Current scope
+## Technology
 
-Phase 0 defines:
+- Next.js and React with strict TypeScript
+- Firebase Authentication behind client/server adapters
+- PostgreSQL and Drizzle ORM for Beaver AI account and sharing data
+- Zod validation, Vitest, ESLint, and Prettier
 
-- the product, users, principles, experience, and feature boundaries;
-- the 16-phase delivery roadmap;
-- system, domain, data, AI, and integration architecture direction;
-- design-system direction;
-- safety, privacy, security, testing, and development expectations; and
-- the process for documenting future architectural decisions.
+Firestore, Firebase Storage, Cloud Functions, and Firebase Hosting are not used.
 
-Authentication, onboarding, courses, tutoring, dashboards, gamification, and
-all other user-facing features belong to later phases.
+## Local setup
+
+Prerequisites: Node.js 22+, npm, a PostgreSQL database, and access to the
+existing Beaver AI Firebase project.
+
+1. Install dependencies:
+
+   ```powershell
+   npm install
+   ```
+
+2. Copy `.env.example` to `.env.local` and enter the registered Firebase Web
+   App's public configuration, `DATABASE_URL`, and `FIREBASE_PROJECT_ID`.
+3. For Firebase Admin locally, use Application Default Credentials through
+   `GOOGLE_APPLICATION_CREDENTIALS`, or configure both Firebase Auth emulator
+   variables from `.env.example`.
+4. Apply the database migration:
+
+   ```powershell
+   npm run db:migrate
+   ```
+
+5. Start the application:
+
+   ```powershell
+   npm run dev
+   ```
+
+In Firebase Authentication, enable Email/Password and Google, keep
+one-account-per-email behavior enabled, and configure the application's
+authorized domains. Never commit service-account files or `.env.local`.
+
+## Validation
+
+```powershell
+npm run check
+```
+
+Individual commands are `format:check`, `lint`, `typecheck`, `test`, `build`,
+and `db:generate`.
 
 ## Documentation
 
 Start with the [documentation index](docs/README.md). The
-[Phase 0 acceptance review](docs/phase-0-acceptance.md) records the status of
-this foundation.
+[identity and access architecture](docs/architecture/identity-and-access.md)
+describes the implemented security boundary. Phase reviews record
+[Phase 0](docs/phase-0-acceptance.md) and
+[Phase 1](docs/phase-1-acceptance.md).
 
 ## Contributing
 

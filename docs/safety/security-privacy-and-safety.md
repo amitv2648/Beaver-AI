@@ -48,13 +48,15 @@ production collection of student data.
 
 ## Identity, authentication, and authorization
 
-Phase 1 must define account types and relationships before implementing access.
-The baseline principles are:
+Phase 1 defines a Beaver AI account as the private owner and parent/educator
+access as an explicitly invited, scoped, revocable relationship. Firebase
+Authentication owns credentials and sessions; Beaver AI verifies its ID tokens
+server-side and owns authorization. The baseline principles are:
 
 - use established, reviewed authentication mechanisms rather than custom
   cryptography;
-- protect passwords using a current memory-hard password hashing scheme if
-  passwords are supported;
+- delegate password storage and verification to Firebase Authentication rather
+  than handling password material in Beaver AI;
 - use secure session handling, rotation, expiration, revocation, CSRF defenses,
   and hardened cookies where applicable;
 - provide safe recovery that does not reveal account existence or allow weak
@@ -68,6 +70,12 @@ The baseline principles are:
 
 A role alone is rarely enough: authorization may depend on relationship, tenant,
 resource, action, consent, and current status.
+
+Phase 1 sharing acceptance requires the invited verified email, stores only a
+hash of the invitation token, expires invitations after seven days, and checks
+active connection scope for every shared-resource authorization decision.
+Revocation changes persisted state immediately. Client-side redirects and
+visibility are not security boundaries.
 
 ## Security engineering baseline
 
@@ -91,19 +99,19 @@ evidence without verified configuration.
 
 ## Priority threat areas
 
-| Threat | Required direction |
-| --- | --- |
-| Cross-learner or cross-tenant access | Object-level authorization, isolation tests, opaque identifiers |
-| Account takeover | Secure sessions/recovery, rate limits, stronger admin authentication |
-| Privileged insider access | Least privilege, approval where warranted, audit, monitoring |
-| Prompt injection and tool abuse | Untrusted-context separation, allowlisted tools, external authorization |
-| Model or provider data leakage | Minimization, contracts/settings, redaction, retention controls |
-| Harmful or age-inappropriate content | Layered policy, detection, safe response, report/escalation |
-| Academic cheating | Pedagogical response modes, assessment controls, transparent boundaries |
-| Upload-based attack | Type/size validation, malware controls, isolation, safe rendering |
-| Social abuse and grooming | Restricted contact model, privacy defaults, reporting/moderation |
-| Reward/economy abuse | Immutable ledger, idempotency, anomaly detection, no cash value |
-| Inference and labeling harm | Provenance, uncertainty, correction, limited use, no fixed labels |
+| Threat                               | Required direction                                                      |
+| ------------------------------------ | ----------------------------------------------------------------------- |
+| Cross-learner or cross-tenant access | Object-level authorization, isolation tests, opaque identifiers         |
+| Account takeover                     | Secure sessions/recovery, rate limits, stronger admin authentication    |
+| Privileged insider access            | Least privilege, approval where warranted, audit, monitoring            |
+| Prompt injection and tool abuse      | Untrusted-context separation, allowlisted tools, external authorization |
+| Model or provider data leakage       | Minimization, contracts/settings, redaction, retention controls         |
+| Harmful or age-inappropriate content | Layered policy, detection, safe response, report/escalation             |
+| Academic cheating                    | Pedagogical response modes, assessment controls, transparent boundaries |
+| Upload-based attack                  | Type/size validation, malware controls, isolation, safe rendering       |
+| Social abuse and grooming            | Restricted contact model, privacy defaults, reporting/moderation        |
+| Reward/economy abuse                 | Immutable ledger, idempotency, anomaly detection, no cash value         |
+| Inference and labeling harm          | Provenance, uncertainty, correction, limited use, no fixed labels       |
 
 Threat models should identify assets, actors, trust boundaries, misuse cases,
 controls, residual risk, and an accountable owner.

@@ -68,7 +68,11 @@ The diagram omits versions and many-to-many cardinalities for readability.
 
 ## Learner and learning model
 
-- **Account:** authentication-facing identity. It is not the learner profile.
+- **External Identity:** a Firebase issuer/subject that proves authentication;
+  it is not the Beaver AI account.
+- **Account:** Beaver AI's application-owned private account space and lifecycle
+  record. It is associated with an external identity and is not the learner
+  profile.
 - **Learner:** the subject whose learning is being supported.
 - **Learner Profile:** goals, preferences, declared context, and approved
   accommodations used for personalization.
@@ -90,6 +94,26 @@ The diagram omits versions and many-to-many cardinalities for readability.
   checked or refreshed.
 
 Completion, correctness, evidence, mastery, and retention are distinct.
+
+## Identity and sharing model
+
+- **Sharing Invitation:** a time-limited, hashed-token invitation created by the
+  student owner for one recipient email, relationship type, and set of scopes.
+- **Sharing Connection:** the accepted, application-owned relationship between
+  a student owner and recipient account.
+- **Relationship Type:** parent or educator context for Phase 1; it is not a
+  global account role or verified legal status.
+- **Permission Scope:** a named category of future learning insight. A scope
+  grants no data unless the owning module also authorizes and exposes that
+  resource.
+- **Account Audit Event:** append-oriented security history for account and
+  sharing lifecycle transitions.
+
+Accounts are private by default. A recipient gains access only after matching
+verified-email acceptance creates an active connection. Authorization requires
+the exact owner, recipient, active state, and scope. Revocation removes access.
+Private notes, AI conversations, credentials, and account settings have no
+shareable Phase 1 scope.
 
 ## Tutoring model
 
@@ -124,17 +148,19 @@ Rewards reference verified domain events and must not own educational truth.
 
 ## Ownership summary
 
-| Truth | Owning module |
-| --- | --- |
-| Identity and access grants | Identity and Access |
-| Learner goals and preferences | Learner Profile |
-| Published objective and prerequisite definitions | Curriculum |
-| Published instructional resource versions | Content |
-| Attempts, responses, and learning evidence | Learning Record / Practice |
-| Mastery estimates and review state | Mastery |
-| Recommendation records and rationale | Personalization |
-| Tutor transcript and evaluations | Tutor |
-| Reward ledger | Rewards |
+| Truth                                            | Owning module              |
+| ------------------------------------------------ | -------------------------- |
+| Identity and access grants                       | Identity and Access        |
+| Accounts and external identity links             | Identity and Access        |
+| Sharing invitations and scoped connections       | Identity and Access        |
+| Learner goals and preferences                    | Learner Profile            |
+| Published objective and prerequisite definitions | Curriculum                 |
+| Published instructional resource versions        | Content                    |
+| Attempts, responses, and learning evidence       | Learning Record / Practice |
+| Mastery estimates and review state               | Mastery                    |
+| Recommendation records and rationale             | Personalization            |
+| Tutor transcript and evaluations                 | Tutor                      |
+| Reward ledger                                    | Rewards                    |
 
 Detailed boundaries between Learning Record, Mastery, and Practice must be
 settled in Phases 5–6 based on concrete transaction and querying needs.

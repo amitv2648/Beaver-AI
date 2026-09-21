@@ -7,9 +7,12 @@ The strategy is risk-based: the highest confidence is required for access
 control, student data, educational evidence, safety policy, scoring, mastery,
 rewards, and AI actions.
 
-Phase 0 has no executable code or test runner. Its validation consists of
-repository inventory, documentation review, link/scope checks, and acceptance
-review. Automation should be added with the first implementation toolchain.
+Phase 1 uses Vitest for deterministic domain and integration-boundary tests.
+Current suites cover Firebase browser operations and persistence configuration,
+protected request rejection, Beaver account synchronization and duplicate
+prevention, updates/deletion, invitation acceptance, scoped authorization, and
+revocation. Firebase and PostgreSQL are represented by controlled test
+boundaries; live environment smoke tests remain required before deployment.
 
 ## Test layers
 

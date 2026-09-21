@@ -2,9 +2,9 @@
 
 ## Status and intent
 
-This document defines the target architectural shape, not an implemented
-system. It constrains future phases without pretending that packages, services,
-or infrastructure already exist.
+The Phase 1 system implements the initial web/API modular monolith, Identity and
+Access module, Firebase Authentication adapter, and PostgreSQL persistence.
+Modules assigned to Phase 2+ remain target architecture only.
 
 ## Architecture posture
 
@@ -38,30 +38,31 @@ flowchart LR
     Core -->|adapter boundaries| External
 ```
 
-Supporting roles and integrations are future scope. Clients never receive
-direct database or provider credentials. The application enforces
-authorization, policy, provenance, and audit requirements at its boundaries.
+Parent and educator sharing relationships now exist in Identity and Access;
+their learning views remain future scope. Clients never receive direct database
+or Firebase Admin credentials. The application verifies Firebase ID tokens and
+enforces authorization, policy, provenance, and audit requirements server-side.
 
 ## Functional modules
 
-| Module | Responsibility | Introduced |
-| --- | --- | --- |
-| Identity and Access | Identities, sessions, roles, consent-facing access rules | Phase 1 |
-| Learner Profile | Goals, preferences, accommodations, and profile lifecycle | Phase 2 |
-| Curriculum | Educational taxonomy, prerequisites, graph traversal, publication | Phase 3 |
-| Content | Lessons, resources, revisions, review, and content delivery | Phase 4 |
-| Learning Record | Attempts, events, progress views, and learning history | Phase 5 |
-| Mastery | Evidence interpretation, mastery estimates, uncertainty, and review state | Phase 5 |
-| Practice and Assessment | Items, sessions, responses, scoring, and feedback | Phase 6 |
-| Personalization | Candidate selection, ranking, constraints, and explanations | Phase 7 |
-| Tutor | Tutoring sessions, context assembly, tools, policies, and evaluation | Phase 8 |
-| Workspace | Subject-specific interactive learning tools | Phase 9 |
-| Work Analysis | Multimodal submissions, analysis, annotation, and review | Phase 10 |
-| Voice | Real-time speech sessions and voice-specific safety controls | Phase 11 |
-| Rewards | XP, levels, BBucks ledger, achievements, quests, and cosmetics | Phase 12 |
-| Social | Relationships, challenges, leagues, rankings, and moderation | Phase 13 |
-| Planning | Test preparation and academic/career exploration | Phase 14 |
-| Operations | Administration, support, audit, moderation, compliance, and reliability | Phase 15 |
+| Module                  | Responsibility                                                            | Introduced |
+| ----------------------- | ------------------------------------------------------------------------- | ---------- |
+| Identity and Access     | Identities, sessions, roles, consent-facing access rules                  | Phase 1    |
+| Learner Profile         | Goals, preferences, accommodations, and profile lifecycle                 | Phase 2    |
+| Curriculum              | Educational taxonomy, prerequisites, graph traversal, publication         | Phase 3    |
+| Content                 | Lessons, resources, revisions, review, and content delivery               | Phase 4    |
+| Learning Record         | Attempts, events, progress views, and learning history                    | Phase 5    |
+| Mastery                 | Evidence interpretation, mastery estimates, uncertainty, and review state | Phase 5    |
+| Practice and Assessment | Items, sessions, responses, scoring, and feedback                         | Phase 6    |
+| Personalization         | Candidate selection, ranking, constraints, and explanations               | Phase 7    |
+| Tutor                   | Tutoring sessions, context assembly, tools, policies, and evaluation      | Phase 8    |
+| Workspace               | Subject-specific interactive learning tools                               | Phase 9    |
+| Work Analysis           | Multimodal submissions, analysis, annotation, and review                  | Phase 10   |
+| Voice                   | Real-time speech sessions and voice-specific safety controls              | Phase 11   |
+| Rewards                 | XP, levels, BBucks ledger, achievements, quests, and cosmetics            | Phase 12   |
+| Social                  | Relationships, challenges, leagues, rankings, and moderation              | Phase 13   |
+| Planning                | Test preparation and academic/career exploration                          | Phase 14   |
+| Operations              | Administration, support, audit, moderation, compliance, and reliability   | Phase 15   |
 
 Phases identify first ownership, not permission to ignore cross-cutting
 requirements until Phase 15. Security, privacy, accessibility, safety,
@@ -114,20 +115,19 @@ module.
   tutor content by default.
 - Environment-independent configuration and replaceable external adapters.
 
-### Recommended for evaluation before Phase 1 implementation
+### Implemented Phase 1 stack
 
-A TypeScript-first workspace is the leading recommendation because it can share
-domain vocabulary and contracts across a web client and server while providing
-strong tooling. A mature server-rendering web framework, relational database,
-and schema-aware ORM or query layer are reasonable candidates. This is not yet
-an accepted stack: the Phase 1 technical spike must compare security support,
-testability, deployment constraints, accessibility, maintenance burden, and
-team competence before recording the choice.
+The modular application uses strict TypeScript, Next.js/React, PostgreSQL,
+Drizzle ORM, Zod, Firebase Authentication, and Vitest. Firebase is isolated
+behind Web SDK and Admin SDK adapters; it is not the Beaver AI account or
+authorization system of record. See
+[ADR-0005](../decisions/0005-phase-1-application-stack.md) and the
+[identity/access architecture](identity-and-access.md).
 
 ### Deliberately deferred
 
-- Specific web framework, server runtime, database product, ORM, cloud, identity
-  provider, AI provider, queue, analytics vendor, and deployment platform
+- Cloud/deployment platform, AI provider, queue, analytics vendor, mail
+  provider, and production operations topology
 - Native mobile applications
 - Microservices, event streaming platforms, graph databases, vector databases,
   and multi-region infrastructure
@@ -152,9 +152,7 @@ calling module. Every integration needs:
 
 ## Deployment evolution
 
-Begin with the fewest independently deployed units consistent with security:
-typically one web application, one application process, one relational
-database, and managed object storage when needed. Background workers may share
-the codebase while deploying separately. Split services or specialized stores
-only after an architecture decision records the concrete pressure and migration
-plan.
+The current deployable shape is one Next.js application, PostgreSQL, and
+external Firebase Authentication. No object storage or background worker is
+used. Split services or specialized stores only after an architecture decision
+records the concrete pressure and migration plan.

@@ -1,38 +1,43 @@
 # Feature scope and boundaries
 
-## Current scope: Phase 0
+## Current implemented scope: Phases 0–1
 
-Phase 0 produces specifications and working agreements only:
+Phase 0 established the product and architecture source of truth. Phase 1 now
+implements:
 
-- product definition, principles, users, experience, and outcomes;
-- long-term capability map and phase boundaries;
-- functional, domain, data, AI, integration, and technical direction;
-- design-system direction;
-- security, privacy, safety, testing, and development principles;
-- roadmap, decision records, and acceptance criteria.
+- email/password registration, sign-in, sign-out, persistence, verification
+  request, and password reset through Firebase Authentication;
+- Google sign-in and explicit linking guidance;
+- an application-owned Beaver AI account synchronized to Firebase identity;
+- protected account access, display-name updates, and account deletion;
+- private-by-default parent/educator invitations, acceptance, scoped
+  connections, revocation, and security audit events;
+- a server-side ownership/scope authorization policy for future modules; and
+- a responsive Beaver AI landing, authentication, account, and sharing
+  experience.
 
-No user-facing application, API, database schema, account system, educational
-content, AI integration, or deployable service is part of Phase 0.
+No learner profile, onboarding, educational content/data, AI integration, or
+Phase 2+ feature is implemented.
 
 ## Long-term capability map
 
-| Capability area | Intended outcome | Owning phase |
-| --- | --- | --- |
-| Identity and access | Secure accounts, sessions, roles, and permissions | 1 |
-| Learner profile | Goals, preferences, constraints, and onboarding context | 2 |
-| Curriculum graph | Reviewed educational structure and prerequisites | 3 |
-| Learning content | Versioned lessons and content workflow | 4 |
-| Mastery and progress | Evidence-based knowledge estimates and history | 5 |
-| Practice and assessment | Valid tasks, feedback, scoring, and evidence | 6 |
-| Personalization | Explainable next-step and review recommendations | 7 |
-| AI tutoring | Structured, context-aware text tutoring | 8 |
-| Learning workspace | Interactive subject-specific tools | 9 |
-| Work analysis | Multimodal analysis and annotation | 10 |
-| Voice tutoring | Real-time spoken tutoring with equivalent safeguards | 11 |
-| Motivation systems | XP, levels, BBucks, quests, and cosmetics | 12 |
-| Social learning | Challenges, leagues, and carefully scoped competition | 13 |
-| Future planning | Test preparation, college, major, and career exploration | 14 |
-| Operations and launch | Administration, safety operations, scaling, compliance | 15 |
+| Capability area         | Intended outcome                                         | Owning phase |
+| ----------------------- | -------------------------------------------------------- | ------------ |
+| Identity and access     | Secure accounts, sessions, roles, and permissions        | 1            |
+| Learner profile         | Goals, preferences, constraints, and onboarding context  | 2            |
+| Curriculum graph        | Reviewed educational structure and prerequisites         | 3            |
+| Learning content        | Versioned lessons and content workflow                   | 4            |
+| Mastery and progress    | Evidence-based knowledge estimates and history           | 5            |
+| Practice and assessment | Valid tasks, feedback, scoring, and evidence             | 6            |
+| Personalization         | Explainable next-step and review recommendations         | 7            |
+| AI tutoring             | Structured, context-aware text tutoring                  | 8            |
+| Learning workspace      | Interactive subject-specific tools                       | 9            |
+| Work analysis           | Multimodal analysis and annotation                       | 10           |
+| Voice tutoring          | Real-time spoken tutoring with equivalent safeguards     | 11           |
+| Motivation systems      | XP, levels, BBucks, quests, and cosmetics                | 12           |
+| Social learning         | Challenges, leagues, and carefully scoped competition    | 13           |
+| Future planning         | Test preparation, college, major, and career exploration | 14           |
+| Operations and launch   | Administration, safety operations, scaling, compliance   | 15           |
 
 The roadmap is the authority for phase deliverables and dependencies.
 

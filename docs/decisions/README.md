@@ -76,13 +76,14 @@ What is being chosen? State boundaries and exceptions.
 
 ## Decision log
 
-| ADR | Status | Decision |
-| --- | --- | --- |
-| [0001](0001-documentation-as-source-of-truth.md) | Accepted | Documentation evolves with implementation |
-| [0002](0002-evolutionary-modular-monolith.md) | Accepted | Begin with an evolutionary modular monolith |
-| [0003](0003-authoritative-data-and-ai-proposals.md) | Accepted | Separate authoritative data from AI proposals |
-| [0004](0004-versioned-curriculum-graph.md) | Accepted | Model curriculum as a versioned graph with curated hierarchies |
+| ADR                                                      | Status   | Decision                                                       |
+| -------------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| [0001](0001-documentation-as-source-of-truth.md)         | Accepted | Documentation evolves with implementation                      |
+| [0002](0002-evolutionary-modular-monolith.md)            | Accepted | Begin with an evolutionary modular monolith                    |
+| [0003](0003-authoritative-data-and-ai-proposals.md)      | Accepted | Separate authoritative data from AI proposals                  |
+| [0004](0004-versioned-curriculum-graph.md)               | Accepted | Model curriculum as a versioned graph with curated hierarchies |
+| [0005](0005-phase-1-application-stack.md)                | Accepted | Select the Phase 1 application stack                           |
+| [0006](0006-student-owned-relationship-authorization.md) | Accepted | Use student-owned, scoped parent and educator relationships    |
 
-Technology products and application frameworks have deliberately not been
-selected. The Phase 1 stack choice requires its own ADR after an evidence-based
-evaluation.
+ADR-0005 records the selected application stack. Deployment hosting and most
+future-phase vendors remain deliberately unselected.

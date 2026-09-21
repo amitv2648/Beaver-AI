@@ -1,8 +1,8 @@
 # Contributing to Beaver AI
 
-Beaver AI is in Phase 0. Contributions should improve the product definition,
-architecture, safety model, roadmap, or development foundation without
-implementing Phase 1+ functionality.
+Beaver AI has completed Phases 0–1. Contributions may maintain the identity,
+account, authorization, and sharing foundation or prepare an explicitly
+authorized next phase. Do not introduce Phase 2+ product behavior incidentally.
 
 ## Workflow
 
@@ -10,9 +10,8 @@ implementing Phase 1+ functionality.
 2. Keep each change focused and identify affected documentation before editing.
 3. Record a new architecture decision when a durable, cross-cutting choice is
    introduced or an accepted choice is reversed.
-4. Run applicable formatting, link, lint, and test checks. Phase 0 has no
-   application toolchain, so documentation review is currently the primary
-   validation.
+4. Run `npm run check`. Database or Firebase boundary changes also require
+   migration review and an appropriate emulator/integration smoke test.
 5. Review the final diff for contradictions, accidental secrets, and
    out-of-scope implementation.
 

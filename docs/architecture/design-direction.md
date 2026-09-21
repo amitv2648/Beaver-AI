@@ -104,9 +104,14 @@ larger screens for richer workspaces. “Web-first” does not mean desktop-only
 Slow networks, intermittent failures, and shared devices need explicit states,
 though full offline operation is not currently promised.
 
-## Design-system evolution
+## Implemented foundation and evolution
 
-When UI implementation begins:
+Phase 1 establishes semantic CSS tokens, accessible focus and form states,
+responsive authentication/account layouts, reduced-motion behavior, and the
+forest/river/wood/sage visual language. It intentionally uses no component
+library or external font dependency.
+
+As the UI evolves:
 
 1. establish tokens before duplicating raw values;
 2. build accessible primitives before feature-specific composites;
@@ -116,5 +121,5 @@ When UI implementation begins:
 5. use visual regression selectively for stable shared components; and
 6. version or migrate breaking component contracts deliberately.
 
-Phase 0 intentionally creates no component library, mock application, or final
-brand assets.
+The current shapes, type stack, and CSS tokens are an initial implementation,
+not final brand assets or a complete component library.

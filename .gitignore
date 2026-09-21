@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Tests and reports
+coverage/
+test-results/
+playwright-report/
+
+# Local configuration and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Tooling
+*.tsbuildinfo
+.eslintcache
+.drizzle/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
