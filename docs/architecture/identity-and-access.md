@@ -84,7 +84,10 @@ Every protected API route:
 5. calls an application use case that enforces ownership or permission.
 
 Client redirects and hidden buttons are user experience controls only. They are
-not authorization controls.
+not authorization controls. Expected invalid, expired, revoked, or disabled
+identities receive a non-sensitive authentication error. Firebase Admin
+credential and service failures remain internal server errors rather than being
+misreported as invalid user sessions.
 
 ## Sharing model
 
@@ -129,7 +132,9 @@ A connection records:
 Current scopes are `learning_time`, `learning_activity`, `academic_progress`,
 `concept_summary`, and `improvement_areas`. Educator relationships do not
 receive `learning_time`. No Phase 1 API exposes learning data; these scopes are
-the contract future modules must require.
+the contract future modules must require. PostgreSQL check constraints mirror
+the scope allowlist and reject self-referential connections so future write
+paths cannot silently bypass these invariants.
 
 There are deliberately no scopes for private AI conversations, personal notes,
 credentials, account settings, or unrelated profile information.
@@ -162,9 +167,10 @@ Deletion requires authentication within the previous five minutes.
 
 Once marked `deleting`, normal synchronization and protected account use are
 denied. If an external deletion step fails, the account remains disabled for a
-safe operational retry rather than becoming active with partially deleted
-data. Final retention and backup-erasure policy remains a pre-production legal
-and operational decision.
+safe operational reconciliation rather than becoming active with partially
+deleted data. Phase 1 does not include an automated reconciler or internal
+operator tool. Final retention and backup-erasure policy remains a
+pre-production legal and operational decision.
 
 ## API surface
 
@@ -185,9 +191,14 @@ Responses containing account or sharing state use `Cache-Control: no-store`.
 
 - Production requires PostgreSQL, Firebase Web App configuration, and Firebase
   Admin credentials or workload identity.
+- The credential-free `verify:phase1:emulator` suite exercises Firebase Admin
+  verification/deletion and the complete application lifecycle locally; it
+  does not validate production credential permissions or real Google popup
+  behavior.
 - This phase does not select a deployment platform, mail provider, or
   distributed rate-limiting service.
 - Firebase and PostgreSQL cannot participate in one atomic transaction. The
-  deletion state machine fails closed and is designed for operational retry.
+  deletion state machine fails closed; production operations must monitor and
+  reconcile accounts that remain in `deleting`.
 - Audit records are application security history, not a finalized legal
   retention system.

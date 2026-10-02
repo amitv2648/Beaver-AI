@@ -3,6 +3,7 @@ import { getDatabase } from "@/infrastructure/database/client";
 import { PostgresIdentityAccessRepository } from "@/infrastructure/database/identity-access-repository";
 import {
   FirebaseIdentityAdministration,
+  isFirebaseIdentityRejected,
   verifyFirebaseToken,
 } from "@/infrastructure/firebase/admin";
 import {
@@ -39,7 +40,10 @@ export async function authenticateRequest(
   let identity: AuthenticatedIdentity;
   try {
     identity = await verifyFirebaseToken(authorization.slice(7));
-  } catch {
+  } catch (error) {
+    if (!isFirebaseIdentityRejected(error)) {
+      throw error;
+    }
     throw new HttpError(
       401,
       "invalid_authentication",

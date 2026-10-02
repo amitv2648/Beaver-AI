@@ -1,4 +1,4 @@
-import { and, eq, inArray, ne, or, sql } from "drizzle-orm";
+import { and, eq, inArray, lte, ne, or, sql } from "drizzle-orm";
 import {
   DomainError,
   normalizeEmail,
@@ -92,45 +92,60 @@ export class PostgresIdentityAccessRepository implements IdentityAccessRepositor
   }
 
   async createAccount(input: CreateAccountInput): Promise<Account> {
-    return this.database.transaction(async (transaction) => {
-      const [account] = await transaction
-        .insert(accounts)
-        .values({
+    try {
+      return await this.database.transaction(async (transaction) => {
+        const [account] = await transaction
+          .insert(accounts)
+          .values({
+            email: input.identity.email,
+            normalizedEmail: input.normalizedEmail,
+            displayName: null,
+            status: "active",
+            createdAt: input.now,
+            updatedAt: input.now,
+          })
+          .returning();
+
+        if (!account) {
+          throw new Error("Account creation did not return an account.");
+        }
+
+        await transaction.insert(authIdentities).values({
+          accountId: account.id,
+          issuer: input.identity.issuer,
+          subject: input.identity.subject,
           email: input.identity.email,
-          normalizedEmail: input.normalizedEmail,
-          displayName: null,
-          status: "active",
+          emailVerifiedAt: input.identity.emailVerified ? input.now : null,
+          providerIds: input.identity.providerIds,
+          lastAuthenticatedAt: input.identity.authenticatedAt,
           createdAt: input.now,
           updatedAt: input.now,
-        })
-        .returning();
-
-      if (!account) {
-        throw new Error("Account creation did not return an account.");
+        });
+        await transaction.insert(accountAuditEvents).values({
+          actorAccountId: account.id,
+          subjectAccountId: account.id,
+          eventType: "account.created",
+          targetType: "account",
+          targetId: account.id,
+          metadata: { identityIssuer: input.identity.issuer },
+          occurredAt: input.now,
+        });
+        return toAccount(account);
+      });
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "code" in error &&
+        error.code === "23505"
+      ) {
+        throw new DomainError(
+          "account_conflict",
+          "This identity or email already belongs to a Beaver AI account.",
+        );
       }
-
-      await transaction.insert(authIdentities).values({
-        accountId: account.id,
-        issuer: input.identity.issuer,
-        subject: input.identity.subject,
-        email: input.identity.email,
-        emailVerifiedAt: input.identity.emailVerified ? input.now : null,
-        providerIds: input.identity.providerIds,
-        lastAuthenticatedAt: input.identity.authenticatedAt,
-        createdAt: input.now,
-        updatedAt: input.now,
-      });
-      await transaction.insert(accountAuditEvents).values({
-        actorAccountId: account.id,
-        subjectAccountId: account.id,
-        eventType: "account.created",
-        targetType: "account",
-        targetId: account.id,
-        metadata: { identityIssuer: input.identity.issuer },
-        occurredAt: input.now,
-      });
-      return toAccount(account);
-    });
+      throw error;
+    }
   }
 
   async synchronizeIdentity(
@@ -317,7 +332,7 @@ export class PostgresIdentityAccessRepository implements IdentityAccessRepositor
         and(
           eq(sharingInvitations.ownerAccountId, accountId),
           eq(sharingInvitations.status, "pending"),
-          sql`${sharingInvitations.expiresAt} <= ${now}`,
+          lte(sharingInvitations.expiresAt, now),
         ),
       );
 

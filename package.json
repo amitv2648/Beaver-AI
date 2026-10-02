@@ -16,7 +16,10 @@
     "test:coverage": "vitest run --coverage",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:rotate-local-password": "node scripts/rotate-local-db-password.mjs",
     "db:studio": "drizzle-kit studio",
+    "verify:firebase-config": "node scripts/verify-firebase-config.mjs",
+    "verify:phase1:emulator": "npm run build && node scripts/run-phase-1-emulator.mjs",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
   },
   "repository": {

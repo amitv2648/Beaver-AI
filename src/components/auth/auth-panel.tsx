@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "./auth-provider";
+import { safeAuthReturnPath } from "./return-path";
 
 type Mode = "signin" | "signup" | "reset";
 
@@ -11,10 +12,7 @@ export function AuthPanel() {
   const searchParams = useSearchParams();
   const requestedMode = searchParams.get("mode");
   const requestedReturnTo = searchParams.get("returnTo");
-  const returnTo =
-    requestedReturnTo?.startsWith("/share/") === true
-      ? requestedReturnTo
-      : "/account";
+  const returnTo = safeAuthReturnPath(requestedReturnTo);
   const [mode, setMode] = useState<Mode>(
     requestedMode === "signup" || requestedMode === "reset"
       ? requestedMode

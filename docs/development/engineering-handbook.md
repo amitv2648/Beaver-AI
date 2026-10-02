@@ -10,7 +10,8 @@ quality gates.
 
 ## Development setup
 
-Use Node.js 22 or newer and npm.
+Use Node.js 22 or newer and npm. Java 21 or newer is needed only when running
+the Firebase Auth emulator verification.
 
 ```powershell
 npm install
@@ -28,9 +29,19 @@ Available commands:
 
 - `npm run dev`, `build`, and `start` operate the Next.js application.
 - `npm run db:generate`, `db:migrate`, and `db:studio` manage PostgreSQL.
+- `npm run db:rotate-local-password` rotates only a localhost PostgreSQL role,
+  verifies the new credential, and atomically updates ignored `.env.local`
+  without printing either password.
 - `npm run format:check`, `lint`, `typecheck`, `test`, and `test:coverage`
   provide focused checks.
 - `npm run check` runs the complete local quality gate.
+- `npm run verify:firebase-config` safely confirms that the public API key,
+  Auth domain, client project ID, server project ID, and localhost
+  authorization belong to one Firebase project without printing their values.
+- `npm run verify:phase1:emulator` builds the application and runs the
+  credential-free Firebase Admin, account, sharing, authorization, and deletion
+  integration suite against the isolated `demo-beaver-ai` Auth emulator and
+  local PostgreSQL.
 
 ## Engineering values
 

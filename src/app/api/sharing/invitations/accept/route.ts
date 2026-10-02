@@ -5,7 +5,7 @@ import {
   authenticateRequest,
   getIdentityAccessService,
 } from "@/server/identity-access";
-import { apiError, readJson } from "@/server/http";
+import { apiError, noStoreHeaders, readJson } from "@/server/http";
 
 export const runtime = "nodejs";
 
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
             message: "Invitation token is invalid.",
           },
         },
-        { status: 422 },
+        { status: 422, headers: noStoreHeaders },
       );
     }
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       account.id,
       identity,
     );
-    return NextResponse.json({ connection });
+    return NextResponse.json({ connection }, { headers: noStoreHeaders });
   } catch (error) {
     return apiError(error);
   }

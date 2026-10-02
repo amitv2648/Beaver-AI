@@ -55,6 +55,9 @@ PostgreSQL is now selected as the system of record and Drizzle owns versioned
 SQL migrations (ADR-0005). Phase 1 creates only `accounts`,
 `auth_identities`, `sharing_invitations`, `sharing_connections`, and
 `account_audit_events`; future educational schemas remain unimplemented.
+Database checks reject empty or unknown permission-scope arrays, educator
+learning-time scope, and self-referential sharing connections in addition to
+the application-layer validation.
 
 ## Identity and isolation
 

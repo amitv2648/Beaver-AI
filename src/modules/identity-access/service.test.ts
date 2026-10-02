@@ -55,7 +55,9 @@ class FixedTokens implements TokenGenerator {
 
 class FakeIdentityAdministration implements IdentityAdministrationGateway {
   deleted: string[] = [];
+  failure: Error | null = null;
   async deleteIdentity(subject: string) {
+    if (this.failure) throw this.failure;
     this.deleted.push(subject);
   }
 }
@@ -65,6 +67,7 @@ class MemoryRepository implements IdentityAccessRepository {
   identityAccounts = new Map<string, string>();
   invitations = new Map<string, SharingInvitation & { tokenHash: string }>();
   connections = new Map<string, SharingConnection>();
+  purgeFailure: Error | null = null;
   private sequence = 0;
 
   async findAccountByIdentity(subject: string) {
@@ -146,6 +149,7 @@ class MemoryRepository implements IdentityAccessRepository {
   }
 
   async purgeAccount(accountId: string) {
+    if (this.purgeFailure) throw this.purgeFailure;
     this.accounts.delete(accountId);
   }
 
@@ -357,6 +361,37 @@ describe("account lifecycle", () => {
 
     expect(identityAdministration.deleted).toEqual(["student"]);
     expect(repository.accounts.has(account.id)).toBe(false);
+  });
+
+  it("fails closed when Firebase identity deletion is interrupted", async () => {
+    const { service, repository, identityAdministration } = setup();
+    const studentIdentity = identity("student", "student@example.com");
+    const account = await service.synchronizeAccount(studentIdentity);
+    identityAdministration.failure = new Error("Firebase unavailable.");
+
+    await expect(
+      service.deleteOwnAccount(account.id, studentIdentity),
+    ).rejects.toThrow("account remains disabled");
+    expect(repository.accounts.get(account.id)?.status).toBe("deleting");
+    await expect(service.getOwnAccount(account.id)).rejects.toMatchObject({
+      code: "account_deleting",
+    });
+  });
+
+  it("fails closed when database purge is interrupted after identity deletion", async () => {
+    const { service, repository, identityAdministration } = setup();
+    const studentIdentity = identity("student", "student@example.com");
+    const account = await service.synchronizeAccount(studentIdentity);
+    repository.purgeFailure = new Error("Database unavailable.");
+
+    await expect(
+      service.deleteOwnAccount(account.id, studentIdentity),
+    ).rejects.toThrow("account remains disabled");
+    expect(identityAdministration.deleted).toEqual(["student"]);
+    expect(repository.accounts.get(account.id)?.status).toBe("deleting");
+    await expect(service.getOwnAccount(account.id)).rejects.toMatchObject({
+      code: "account_deleting",
+    });
   });
 });
 

@@ -26,7 +26,8 @@ Firestore, Firebase Storage, Cloud Functions, and Firebase Hosting are not used.
 ## Local setup
 
 Prerequisites: Node.js 22+, npm, a PostgreSQL database, and access to the
-existing Beaver AI Firebase project.
+existing Beaver AI Firebase project. Java 21+ is required only for the local
+Firebase Auth emulator verification.
 
 1. Install dependencies:
 
@@ -39,13 +40,19 @@ existing Beaver AI Firebase project.
 3. For Firebase Admin locally, use Application Default Credentials through
    `GOOGLE_APPLICATION_CREDENTIALS`, or configure both Firebase Auth emulator
    variables from `.env.example`.
-4. Apply the database migration:
+4. Validate that the Firebase Web App values all belong to the same project:
+
+   ```powershell
+   npm run verify:firebase-config
+   ```
+
+5. Apply the database migration:
 
    ```powershell
    npm run db:migrate
    ```
 
-5. Start the application:
+6. Start the application:
 
    ```powershell
    npm run dev
@@ -55,6 +62,17 @@ In Firebase Authentication, enable Email/Password and Google, keep
 one-account-per-email behavior enabled, and configure the application's
 authorized domains. Never commit service-account files or `.env.local`.
 
+To verify the full server-side identity, account, sharing, authorization, and
+deletion lifecycle without Firebase Admin credentials, start with a migrated
+local database and run:
+
+```powershell
+npm run verify:phase1:emulator
+```
+
+This uses the isolated `demo-beaver-ai` Auth emulator project, creates only
+synthetic identities, and removes its database and emulator records.
+
 ## Validation
 
 ```powershell
@@ -62,7 +80,7 @@ npm run check
 ```
 
 Individual commands are `format:check`, `lint`, `typecheck`, `test`, `build`,
-and `db:generate`.
+`db:generate`, and `verify:phase1:emulator`.
 
 ## Documentation
 

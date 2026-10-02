@@ -11,8 +11,15 @@ Phase 1 uses Vitest for deterministic domain and integration-boundary tests.
 Current suites cover Firebase browser operations and persistence configuration,
 protected request rejection, Beaver account synchronization and duplicate
 prevention, updates/deletion, invitation acceptance, scoped authorization, and
-revocation. Firebase and PostgreSQL are represented by controlled test
-boundaries; live environment smoke tests remain required before deployment.
+revocation. The Phase 1 release pass also exercises the real PostgreSQL schema
+inside a rolled-back transaction and the configured Firebase Web API with
+synthetic identities. The `verify:phase1:emulator` suite adds 62 integration
+checks across Firebase Admin token verification/deletion, email/password,
+synthetic Google identity creation and linking, PostgreSQL account
+synchronization, invitation lifecycle, scoped authorization, revocation,
+database constraints, and application-managed deletion. Browser-interactive
+flows and production Firebase credential permissions still require environment
+smoke tests before deployment.
 
 ## Test layers
 

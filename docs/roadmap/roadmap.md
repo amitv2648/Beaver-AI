@@ -77,8 +77,9 @@ complete and no Phase 1+ functionality has been implemented.
 
 ## Phase 1 — Authentication, Accounts & Permissions
 
-**Status:** implemented; environment-specific Firebase/PostgreSQL smoke
-validation is required before deployment.
+**Status:** implemented; repository, local PostgreSQL, and isolated Firebase
+Auth/Admin emulator verification pass. Production credential authorization and
+browser-interactive Firebase smoke validation are required before deployment.
 
 **Purpose:** establish secure identity and access foundations.
 

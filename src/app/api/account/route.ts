@@ -4,17 +4,14 @@ import {
   authenticateRequest,
   getIdentityAccessService,
 } from "@/server/identity-access";
-import { apiError, readJson } from "@/server/http";
+import { apiError, noStoreHeaders, readJson } from "@/server/http";
 
 export const runtime = "nodejs";
 
 async function currentAccount(request: NextRequest) {
   try {
     const { account } = await authenticateRequest(request);
-    return NextResponse.json(
-      { account },
-      { headers: { "Cache-Control": "no-store" } },
-    );
+    return NextResponse.json({ account }, { headers: noStoreHeaders });
   } catch (error) {
     return apiError(error);
   }
@@ -30,7 +27,7 @@ export async function PATCH(request: NextRequest) {
       account.id,
       await readJson(request),
     );
-    return NextResponse.json({ account: updated });
+    return NextResponse.json({ account: updated }, { headers: noStoreHeaders });
   } catch (error) {
     return apiError(error);
   }

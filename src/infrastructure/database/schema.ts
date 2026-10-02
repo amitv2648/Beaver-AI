@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  check,
   index,
   jsonb,
   pgEnum,
@@ -102,6 +103,13 @@ export const sharingInvitations = pgTable(
   },
   (table) => [
     uniqueIndex("sharing_invitations_token_hash_unique").on(table.tokenHash),
+    check(
+      "sharing_invitations_permission_scopes_valid",
+      sql`jsonb_typeof(${table.permissionScopes}) = 'array'
+        and jsonb_array_length(${table.permissionScopes}) > 0
+        and ${table.permissionScopes} <@ '["learning_time","learning_activity","academic_progress","concept_summary","improvement_areas"]'::jsonb
+        and (${table.relationshipType} <> 'educator' or not ${table.permissionScopes} @> '["learning_time"]'::jsonb)`,
+    ),
     index("sharing_invitations_owner_idx").on(table.ownerAccountId),
     index("sharing_invitations_recipient_idx").on(
       table.normalizedRecipientEmail,
@@ -137,6 +145,17 @@ export const sharingConnections = pgTable(
   (table) => [
     uniqueIndex("sharing_connections_source_invitation_unique").on(
       table.sourceInvitationId,
+    ),
+    check(
+      "sharing_connections_permission_scopes_valid",
+      sql`jsonb_typeof(${table.permissionScopes}) = 'array'
+        and jsonb_array_length(${table.permissionScopes}) > 0
+        and ${table.permissionScopes} <@ '["learning_time","learning_activity","academic_progress","concept_summary","improvement_areas"]'::jsonb
+        and (${table.relationshipType} <> 'educator' or not ${table.permissionScopes} @> '["learning_time"]'::jsonb)`,
+    ),
+    check(
+      "sharing_connections_distinct_accounts",
+      sql`${table.ownerAccountId} <> ${table.recipientAccountId}`,
     ),
     uniqueIndex("sharing_connections_active_relationship_unique")
       .on(

@@ -9,6 +9,35 @@ import { getAuth } from "firebase-admin/auth";
 import type { AuthenticatedIdentity } from "@/modules/identity-access/model";
 import type { IdentityAdministrationGateway } from "@/modules/identity-access/ports";
 
+const rejectedIdentityCodes = new Set([
+  "auth/argument-error",
+  "auth/id-token-expired",
+  "auth/id-token-revoked",
+  "auth/invalid-id-token",
+  "auth/tenant-id-mismatch",
+  "auth/user-disabled",
+  "auth/user-not-found",
+]);
+
+class FirebaseIdentityRejectedError extends Error {
+  constructor() {
+    super("The Firebase identity cannot be used.");
+    this.name = "FirebaseIdentityRejectedError";
+  }
+}
+
+export function isFirebaseIdentityRejected(error: unknown): boolean {
+  if (error instanceof FirebaseIdentityRejectedError) {
+    return true;
+  }
+
+  if (!error || typeof error !== "object" || !("code" in error)) {
+    return false;
+  }
+
+  return rejectedIdentityCodes.has(String(error.code));
+}
+
 function getAdminApp() {
   if (getApps().length > 0) {
     return getApp();
@@ -33,7 +62,7 @@ export async function verifyFirebaseToken(
 ): Promise<AuthenticatedIdentity> {
   const decoded = await getAuth(getAdminApp()).verifyIdToken(token, true);
   if (!decoded.email) {
-    throw new Error("The authenticated Firebase identity has no email.");
+    throw new FirebaseIdentityRejectedError();
   }
 
   const providerIds = Object.keys(decoded.firebase.identities ?? {}).filter(
